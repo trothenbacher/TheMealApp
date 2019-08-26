@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import { View, Text, Switch, Platform, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setFilters } from '../store/actions/meals';
 import Colors from '../constants/Colors';
 
 const FilterSwitch = props => {
@@ -25,18 +27,21 @@ const FiltersScreen = props => {
     const [isVegan, setIsVegan] = useState(false);
     const [isVegetarian, setIsVegetarian] = useState(false);
 
+    const dispatch = useDispatch();
+
     const saveFilters = useCallback(() => {
         const appliedFilters = {
             glutenFree: isGlutenFree,
             lactoseFree: isLactoseFree,
             vegan: isVegan,
             vegetarian: isVegetarian
-        }
-        console.log(appliedFilters);
-    }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+        };
+
+        dispatch(setFilters(appliedFilters));
+    }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
 
     useEffect(() => {
-        navigation.setParams({save: saveFilters});
+        navigation.setParams({ save: saveFilters });
     }, [saveFilters]);
 
     return (
@@ -80,7 +85,7 @@ FiltersScreen.navigationOptions = navData => {
                 />
             </HeaderButtons>
         ),
-        headerRight:  (
+        headerRight: (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
                     title='Save'
