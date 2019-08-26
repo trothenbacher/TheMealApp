@@ -22,5 +22,5 @@ The app is from the udemy course 'React Native - The Practical Guide' from Maxim
 
 1. Start an Android device with Android Virtual Device Manager
 2. Start expo with `npm start` in the project root
-3. Press i to run Petmergency on the iOS Simulator
-4. Press a to run Petmergency on the Android Simulator
+3. Press i to run TheMealApp on the iOS Simulator
+4. Press a to run TheMealApp on the Android Simulator
